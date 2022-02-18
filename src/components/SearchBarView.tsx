@@ -1,7 +1,7 @@
-import {useState, useEffect} from 'react'
-import { SafeAreaView, View, StyleSheet} from 'react-native'
+import { gql, useLazyQuery } from '@apollo/client'
+import { useEffect, useState } from 'react'
+import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { Icon, Input } from 'react-native-elements'
-import { gql, useLazyQuery} from '@apollo/client'
 
 // GraphQL fragment
 const COMPANY_TILE_DATA = gql` {
@@ -16,14 +16,15 @@ const COMPANY_TILE_DATA = gql` {
 `
 
 const GET_COMPANY_DATA = gql`
-  query getBussiness ($_value: String!)
-    bussinessByName (name:$_value){
+  query getBussiness ($_value: String!) {
+    bussinessByName (name:$_value) {
       id
       name
       profilePicture
       sustainabilityScore
       customerScore
     }
+  }
 `;
 
 const SearchBar = () => {
