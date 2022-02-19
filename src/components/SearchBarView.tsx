@@ -5,36 +5,43 @@ import { gql, useLazyQuery} from '@apollo/client'
 
 // GraphQL fragment
 const COMPANY_TILE_DATA = gql` {
-    fragment CompanyTile on Business{
-        id
-        name
-        profilePicture
-        sustainabilityScore
-        customerScore
-    }
+  fragment CompanyTile on Business{
+    id
+    name
+    profilePicture
+    sustainabilityScore
+    customerScore
+  }
 }
 `
+
+const GET_COMPANY_DATA = gql`
+  query getBussiness ($_value: String!)
+    bussinessByName (name:$_value){
+      id
+      name
+      profilePicture
+      sustainabilityScore
+      customerScore
+    }
+`;
 
 const SearchBar = () => {
   // Search field
   const [value, onChangeText] = useState('')
     
   // Query
-  const [executeSearch, {error}] = useLazyQuery(    // 'loading' and 'data' can also be returned (not just error)
-    COMPANY_TILE_DATA
+  const [executeSearch, {data, error}] = useLazyQuery(    // 'loading' and 'data' can also be returned (not just error)
+    GET_COMPANY_DATA, { variables: { name: value } }
   )
 
   // Debounce query
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      executeSearch({
-        variables: {String: value}
-      }).then(data => console.log(data), () => console.error(error))
+      executeSearch().then(data => console.log(data), (error) => console.error(error))
     }, 300) 
     return () => clearTimeout(delayDebounceFn)
   }, [value])
-
-    
     
   const updateSearch = (text : string) => {
     onChangeText(text)

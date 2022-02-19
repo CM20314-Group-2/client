@@ -6,6 +6,7 @@
     "baseUrl": "src",
     "rootDir": "src",
     "jsx": "react-native",
+    "lib": ["es2020"],
     "paths": {
       "@components/*": ["components/*"],
     },
