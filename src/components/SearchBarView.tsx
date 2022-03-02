@@ -1,5 +1,5 @@
 import { gql, useLazyQuery } from '@apollo/client'
-import { useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { Icon, Input } from 'react-native-elements'
 
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default SearchBarView
+export default SearchBar

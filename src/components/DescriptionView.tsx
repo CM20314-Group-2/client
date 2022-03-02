@@ -5,7 +5,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 type ViewProps = Pick<DisplayableBusiness, 'profileText'>
 
 const DescriptionView = ({ profileText }: ViewProps) => (
-  <View style={styles.compoundStyle}>
+  <View>
     <Text style={styles.headingText}>DESCRIPTION</Text>
     <View style={styles.itemBackgroundStyle}>
       <View style={styles.textAndImageContainerStyle}>
