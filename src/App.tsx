@@ -1,24 +1,4 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-<<<<<<< HEAD
-import MapView from '@components/MapView'
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import Constants from 'expo-constants'
-
-const { manifest } = Constants
-
-// Initialise Apollo Client
-const client = new ApolloClient({
-  uri: `${Constants.manifest?.extra?.serverAddress}`, // Server URL (must be absolute)
-  cache: new InMemoryCache() // Cache
-})
-
-const App = () => {
-  return (
-    <ApolloProvider client={client}>
-      <View style={styles.container}>
-        <MapView/>
-=======
 import AccountView from '@components/AccountView'
 import MapSlideUpSheet from '@components/MapSlideUpSheet'
 import MapView from '@components/MapView'
@@ -72,7 +52,6 @@ export const FeedScreen = ({ navigation } : Props) => {
           </TouchableOpacity>
         </SafeAreaView>
         <MapSlideUpSheet parentData={navigation} />
->>>>>>> origin/sprint-2
       </View>
     </ApolloProvider>
   )

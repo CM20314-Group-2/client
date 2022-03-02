@@ -14,12 +14,6 @@ const TitleView = ({ name, profilePicture, businessAddress } : { name : string, 
 )
 
 export const styles = StyleSheet.create({
-<<<<<<< HEAD
-  titleViewStyle: {
-    alignItems: 'center',
-    marginTop: '5%',
-    marginBottom: '8%'
-=======
   profilePictureStyle: {
     borderRadius: 10,
     height: 90,
@@ -28,22 +22,15 @@ export const styles = StyleSheet.create({
   subtitleText: {
     color: '#A0A0A0',
     fontSize: 10,
->>>>>>> origin/sprint-2
   },
   titleText: {
     fontSize: 25,
     fontWeight: '500',
   },
-<<<<<<< HEAD
-  subtitleText: {
-    fontSize: 10,
-    color: '#A0A0A0',
-=======
   titleViewStyle: {
     alignItems: 'center',
     marginBottom: '8%',
     marginTop: '5%',
->>>>>>> origin/sprint-2
   },
 })
 

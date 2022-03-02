@@ -8,14 +8,10 @@ type ComponentProps = Pick<
   'customerScore' | 'sustainabilityScore'
 >
 
-<<<<<<< HEAD
-const RatingsView = ({ customerScore, sustainabilityScore}: ViewProps ) => (
-=======
 const RatingsView = ({
   customerScore,
   sustainabilityScore,
 }: ComponentProps) => (
->>>>>>> origin/sprint-2
   <View style={styles.compoundStyle}>
     <Text style={styles.headingText}>RATINGS</Text>
     <View style={styles.ratingsHorizontalStyle}>
@@ -34,18 +30,6 @@ const styles = StyleSheet.create({
   },
   headingText: {
     color: '#A0A0A0',
-<<<<<<< HEAD
-    marginLeft: '1%',
-    marginBottom: '1%'
-  },
-  ratingsHorizontalStyle: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  compoundStyle: {
-    marginBottom: '8%'
-  }
-=======
     fontSize: 12,
     marginBottom: '1%',
     marginLeft: '1%',
@@ -55,7 +39,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
->>>>>>> origin/sprint-2
 })
 
 export default RatingsView
