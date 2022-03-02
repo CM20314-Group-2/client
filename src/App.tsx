@@ -1,20 +1,14 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import BusinessView from '@components/BusinessView'
 import MapView from '@components/MapView'
-import SearchView from '@components/SearchView'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
+import Constants from 'expo-constants'
 
-import Constants from "expo-constants";
-
-const { manifest } = Constants;
-
-const uri = `http://${manifest?.debuggerHost?.split(':').shift()}:3000`;
+const { manifest } = Constants
 
 // Initialise Apollo Client
-
 const client = new ApolloClient({
-  uri: uri, // Server URL (must be absolute)
+  uri: `${Constants.manifest?.extra?.serverAddress}`, // Server URL (must be absolute)
   cache: new InMemoryCache() // Cache
 })
 

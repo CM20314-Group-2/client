@@ -1,23 +1,11 @@
 import { gql, useLazyQuery } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState} from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { Icon, Input } from 'react-native-elements'
 
-// GraphQL fragment
-const COMPANY_TILE_DATA = gql` {
-  fragment CompanyTile on Business{
-    id
-    name
-    profilePicture
-    sustainabilityScore
-    customerScore
-  }
-}
-`
-
 const GET_COMPANY_DATA = gql`
   query getBussiness ($_value: String!) {
-    bussinessByName (name:$_value) {
+    businessByName (name:$_value) {
       id
       name
       profilePicture
@@ -25,21 +13,20 @@ const GET_COMPANY_DATA = gql`
       customerScore
     }
   }
-`;
-
+`
 const SearchBar = () => {
   // Search field
   const [value, onChangeText] = useState('')
     
   // Query
   const [executeSearch, {data, error}] = useLazyQuery(    // 'loading' and 'data' can also be returned (not just error)
-    GET_COMPANY_DATA, { variables: { name: value } }
+    GET_COMPANY_DATA, { variables: { _value: value } }
   )
 
   // Debounce query
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      executeSearch().then(data => console.log(data), (error) => console.error(error))
+      executeSearch().then(data => console.log(data), (error) => console.log(error))
     }, 300) 
     return () => clearTimeout(delayDebounceFn)
   }, [value])

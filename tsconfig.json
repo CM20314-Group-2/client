@@ -3,14 +3,14 @@
   "compilerOptions": {
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "src",
-    "rootDir": "src",
+    "baseUrl": "./src",
+    "rootDir": ".",
     "jsx": "react-native",
-    "lib": ["es2020"],
     "paths": {
       "@components/*": ["components/*"],
     },
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
+  

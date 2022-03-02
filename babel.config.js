@@ -1,9 +1,9 @@
 module.exports = function(api) {
-  api.cache(true);
+  api.cache(true)
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      ["module-resolver", {
+      ['module-resolver', {
         // root property does not seem to work
         alias: {
           '@components': './src/components',
@@ -15,5 +15,5 @@ module.exports = function(api) {
         ]
       }]
     ]
-  };
-};
+  }
+}
