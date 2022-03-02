@@ -23,8 +23,8 @@ const SearchBar = () => {
     GET_COMPANY_DATA, { variables: { _value: value } }
   )
 
-  // Debounce query
   useEffect(() => {
+    // Debounce query
     const delayDebounceFn = setTimeout(() => {
       executeSearch().then(data => console.log(data), (error) => console.log(error))
     }, 300) 
@@ -36,54 +36,51 @@ const SearchBar = () => {
   }
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <React.Fragment>
       <View style={styles.searchBarView}>
-        <Input 
+        <Input
           inputContainerStyle={styles.searchInput}
           placeholder='Search here'
-          onChangeText={text => updateSearch(text)}
-
-          // Search Icon
-          leftIcon = {
+          onChangeText={(text) => onChangeText(text)}
+          leftIcon={<Icon name='search' size={25} />}
+          leftIconContainerStyle={styles.leftContainerIconStyle}
+          rightIcon={
             <Icon
-              name='search'
+              name='options-outline'
+              type='ionicon'
               size={25}
+              onPress={() => console.error('Not implemented.')}
             />
-          }
-          leftIconContainerStyle = {{marginLeft:'2%'}}
-
-          // Filter Icon
-          rightIcon = {<Icon
-            name='options-outline'
-            type='ionicon'
-            size={25}
-            onPress={() => console.error('Not implemented.')}
-          />
           }
           value={value}
         />
       </View>
-    </SafeAreaView>
-        
+    </React.Fragment>
   )
-} 
+}
 
 const styles = StyleSheet.create({
+  leftContainerIconStyle: {
+    marginLeft: '5%',
+  },
   safeAreaView: {
-    flex:1,
-    padding:20,
-    flexDirection: 'column'
+    flex: 1,
+    padding: 20,
+    flexDirection: 'column',
   },
   searchInput: {
-    borderRadius:10,
-    borderWidth:2,
-    borderColor:'#FFFFFF',
-    backgroundColor:'#FFFFFF',
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
+    backgroundColor: '#E7E7E7',
+    opacity: 1,
+    width: '90%',
+    alignSelf: 'center',
   },
-  searchBarView:{
+  searchBarView: {
     marginTop: 'auto',
-    marginBottom:'10%',
-  }
+    marginBottom: '10%',
+  },
 })
 
-export default SearchBar
+export default SearchBarView

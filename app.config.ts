@@ -31,8 +31,15 @@ export default {
       favicon: './assets/favicon.png'
     },
     extra: {
+<<<<<<< HEAD
       serverAddress: 'https://73d2-86-131-224-6.ngrok.io'
       
     }
   }
 }
+=======
+      serverAddress: console.error('serverAddress must be specified.')
+    }
+  }
+}
+>>>>>>> origin/sprint-2

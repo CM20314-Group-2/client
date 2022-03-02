@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import { Option } from '@components/SearchResultSorter'
+import React, { useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import {SortOptions as SortOptionsType} from '@futureproof/typings'
 
 interface ComponentProps {
-  options: {label: string, value: SortOptionsType}[],
-  initial?: number | null,
-  onChange: React.Dispatch<React.SetStateAction<{label: string, value: SortOptionsType}>>
+  options: Option[]
+  initial?: number | null
+  onChange: React.Dispatch<React.SetStateAction<Option>>
 }
 
 /**
@@ -19,18 +20,17 @@ interface ComponentProps {
  * @param onChange the function that is called when the user clicks on an option
  * @returns a styled component that contains all of the sorting options
  */
-const SortOptions = ({ options, initial, onChange } : ComponentProps) => {
+const SortOptions = ({ options, initial, onChange }: ComponentProps) => {
   let initialOption = null
 
-  if (initial !== undefined  && initial !== null) {
-    initialOption = (initial >= 0 && initial < options.length) ? options[initial] : null
+  if (initial !== undefined && initial !== null) {
+    initialOption =
+      initial >= 0 && initial < options.length ? options[initial] : null
   }
 
-  // const io = !initial ? ((initial >= 0 && initial < options.length) ? options[initial] : null) : null
+  const [userOption, setUserOption] = useState<Option | null>(initialOption)
 
-  const [userOption, setUserOption] = useState<{label: string, value: SortOptionsType} | null>(initialOption)
-
-  const updateOptionChoice = (option: {label: string, value: SortOptionsType}) => {
+  const updateOptionChoice = (option: Option) => {
     onChange(option)
     setUserOption(option)
   }
@@ -41,20 +41,23 @@ const SortOptions = ({ options, initial, onChange } : ComponentProps) => {
         return (
           <Pressable
             key={option.value}
-            style={({ pressed }) => [
-              {
-                backgroundColor: pressed ? '#ededed' : '#ffffff',
-                opacity: pressed ? 0.5 : 1
-              },
-              styles.option,
-              option === userOption ? styles.selected_option : styles.unselected_option
-            ]}
-            onPress={ () => updateOptionChoice(option) }
+            style={({ pressed }) => ({
+              backgroundColor: pressed ? '#ededed' : '#ffffff',
+              opacity: pressed ? 0.5 : 1,
+              ...(option === userOption
+                ? styles.selected_option
+                : styles.unselected_option),
+              ...styles.option,
+            })}
+            onPress={() => updateOptionChoice(option)}
+            testID={`sort-option-${option.value}`}
           >
             <Text
               style={[
                 styles.text,
-                option === userOption ? styles.selected_text : styles.unselected_text
+                option === userOption
+                  ? styles.selected_text
+                  : styles.unselected_text,
               ]}
             >
               {option.label}
@@ -68,34 +71,34 @@ const SortOptions = ({ options, initial, onChange } : ComponentProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '60%',
-    marginTop: 10,
+    justifyContent: 'space-evenly',
     marginBottom: 15,
-    justifyContent: 'space-evenly'
+    marginTop: 10,
+    width: '60%',
   },
   option: {
     borderRadius: 10,
     borderWidth: 2,
-    margin: 5
+    margin: 5,
   },
   selected_option: {
     backgroundColor: '#1ea853',
-    borderColor: '#1ea853'
+    borderColor: '#1ea853',
   },
   selected_text: {
     color: '#ffffff',
   },
   text: {
     fontSize: 15,
+    padding: 5,
     textAlign: 'center',
-    padding: 5
   },
   unselected_option: {
-    borderColor: '#ededed'
+    borderColor: '#ededed',
   },
   unselected_text: {
-    color: '#000000'
-  }
+    color: '#000000',
+  },
 })
 
 export default SortOptions
