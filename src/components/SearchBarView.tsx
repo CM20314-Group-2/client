@@ -1,6 +1,6 @@
-import { gql, useLazyQuery } from '@apollo/client'
+import { gql, useLazyQuery, makeVar } from '@apollo/client'
 import React, { useEffect, useState} from 'react'
-import { SafeAreaView, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Icon, Input } from 'react-native-elements'
 
 const GET_COMPANY_DATA = gql`
@@ -14,6 +14,9 @@ const GET_COMPANY_DATA = gql`
     }
   }
 `
+
+export const globalData = makeVar([]);
+
 const SearchBar = () => {
   // Search field
   const [value, onChangeText] = useState('')
@@ -26,7 +29,7 @@ const SearchBar = () => {
   useEffect(() => {
     // Debounce query
     const delayDebounceFn = setTimeout(() => {
-      executeSearch().then(data => console.log(data), (error) => console.log(error))
+      executeSearch().then(_data => globalData(data), (error) => console.log(error))
     }, 300) 
     return () => clearTimeout(delayDebounceFn)
   }, [value])
@@ -39,6 +42,7 @@ const SearchBar = () => {
     <React.Fragment>
       <View style={styles.searchBarView}>
         <Input
+          testID='search-bar'
           inputContainerStyle={styles.searchInput}
           placeholder='Search here'
           onChangeText={(text) => onChangeText(text)}
